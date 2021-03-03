@@ -1,0 +1,32 @@
+Package: magfoo
+Title: Manejar archivo de objetos
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Eddy",
+           family = "Castellón",
+           role = c("aut", "cre"),
+           email = "eddy.castellon@mag.gob.ni",
+           comment = "")
+           
+Description: Usar la función \code{load} para cargar los objetos
+             almacenados en un archivo tiene dos inconvenientes. Uno
+             es que se cargan todos los objetos aunque no se
+             necesiten; y otro es que se remplazan los objetos con el
+             mismo nombre de uno de los que se leen, lo cual es
+             riesgoso porque se pueden echar a perder datos previamente
+             obtenidos. Por otra parte, la función \code{save},
+             remplaza todo el contenido de un archivo con los objetos
+             que se almacenan. Esto lo que estimula es la
+             proliferación de archivos en el transcurso de un
+             análisis.
+
+             Las funciones de esta librería facilitan el manejo de
+             esos inconvenientes, porque permiten explorar, leer, guardar,
+             y remover los objetos almacenados en un solo archivo, de
+             forma más segura.
+
+License: MIT
+Encoding: UTF-8
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
