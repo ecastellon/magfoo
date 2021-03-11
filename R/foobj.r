@@ -345,12 +345,12 @@ get_off <- function(..., file = character(), class = ".") {
 #' \dontrun{
 #'   list_dff("path/file")
 #'   # "df1", "df2"
-#'   x <- get_dff("path/file", df2)
-#'   y <- get_dff("path/file", df2, df1)
+#'   x <- get_dffs("path/file", df2)
+#'   y <- get_dffs("path/file", df2, df1)
 #' }
 #' @export
 #' @author eddy castellón
-get_dff <- function(file, ...) {
+get_dffs <- function(file, ...) {
     if (missing(...)) {
         oo <- get_off(file = file, class = "data.frame")
     } else {
@@ -364,24 +364,23 @@ get_dff <- function(file, ...) {
     }
 }
 
-## ' Lee - asigna un data.frame
-## ' @description read one data frame saved in a file and bind it to a
-## '     variable in the parent.frame.
-## ' @param x data frame's name or a string with the name
-## ' @param file character; file's path
-## ' @return a data.frame or NULL invisible
-## ' @seealso get_off
-## ' @export
-## ' @author eddy castellón
-## get_dff <- function(x, file) {
-##     df <- as.character(substitute(x))
-##     oo <- do.call("get_off", list(df, file = file, class = "data.frame"))
-##     if (is.null(oo)) {
-##         return(oo)
-##     } else {
-##         invisible(oo)
-##     }
-## }
+#' Lee - asigna un data.frame
+#' @description Lee un data frame y lo asocia con una variable
+#' @param x nombre del data frame o character con el nombre
+#' @param file character: nombre del archivo
+#' @return a data.frame o NULL
+#' @seealso \code{get_dffs} \code{get_off}
+#' @export
+#' @author eddy castellón
+get_dff <- function(x, file) {
+    df <- as.character(substitute(x))
+    oo <- do.call("get_off", list(df, file = file, class = "data.frame"))
+    if (is.null(oo)) {
+        return(oo)
+    } else {
+        invisible(oo)
+    }
+}
 
 #' Remover - objeto
 #' @description Remueve objetos de un archivo y guarda los restantes
