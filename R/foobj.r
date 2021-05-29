@@ -330,6 +330,30 @@ get_off <- function(..., file = character(), class = ".") {
     }
 }
 
+#' Leer-asignar objeto
+#' @description Lee un objeto almacenado en archivo y lo asigna (bind)
+#'     a una variable.
+#' @details Versión simplificada de \code{get_off} con llamada
+#'     estándar
+#' @param x character: nombre del objeto.
+#' @param file character: nombre del archivo
+#' @seealso \code{get_off}
+#' @return objeto o \code{NULL}
+#' @export
+#' @examples
+get_off_c <- function(x = character(), file = character()) {
+    stopifnot(filled_char(x) && nzchar(x) && filled_char(file))
+    
+    ne <- new.env(parent = emptyenv())
+    oo <- try_load(file, ne)
+
+    if (is.null(oo) || !is.element(x, oo)) {
+        return(oo)
+    }
+    
+    invisible(get(x, env = ne, inherits = FALSE))
+}
+
 #' Lee - asigna data.frames
 #' @description Lee uno o más data.frame y los asigna a una variable.
 #' @details Es alias de la función \code{get_off} con argumento
