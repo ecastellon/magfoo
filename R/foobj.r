@@ -341,6 +341,7 @@ get_off <- function(..., file = character(), class = ".") {
 #' @return objeto o \code{NULL}
 #' @export
 #' @examples
+#' \dontrun{x <- get_off_c("obj", file = "some-file.rda")}
 get_off_c <- function(x = character(), file = character()) {
     stopifnot(filled_char(x) && nzchar(x) && filled_char(file))
     
