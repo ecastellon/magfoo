@@ -1,8 +1,7 @@
 # -*- coding: utf-8 -*-
 
 #' Metadatos - Asignar
-#' @description Le asigna a un objeto, una breve descripción o
-#'     metadatos.
+#' @description Asignar una breve descripción o metadatos.
 #' @details Al objeto se le agrega el atributo "meta" para registrar
 #'     una breve descripción (metadatos), o el nombre de un archivo en
 #'     el que se hace una descripción más extensa. Ese nombre debe
@@ -277,17 +276,16 @@ read_dff <- function(..., file, env = parent.frame()) {
     return(oo)
 }
 
-#' Lee y asigna objetos
-#' @description Lee uno o más objetos almacenados en archivo y los
-#'     asigna (bind) a una variable. La variable será un objeto de
-#'     clase lista si son leídos dos o más objetos.
+#' Leer objetos
+#' @description Lee uno o más objetos almacenados en archivo. Cuando
+#'     es más de uno, se devuelven en una lista.
 #' @param ... nombres de objetos. Si ausente, lee todos los
 #'     almacenados
 #' @param file character: nombre del archivo
 #' @param class character: clase de los objetos. Por omisión, de
 #'     cualquier clase (\code{class = "."})
 #' @seealso \code{read_off}
-#' @return objeto, lista de objectos o \code{NULL}
+#' @return objeto, lista de objetos o \code{NULL}
 #' @examples
 #' df <- data.frame(x = 1:3, y = 3:1)
 #' meta(df) <- "some metadata"
@@ -330,9 +328,8 @@ get_off <- function(..., file = character(), class = ".") {
     }
 }
 
-#' Leer-asignar objeto
-#' @description Lee un objeto almacenado en archivo y lo asigna (bind)
-#'     a una variable.
+#' Leer-objeto
+#' @description Lee un objeto almacenado en archivo
 #' @details Versión simplificada de \code{get_off} con llamada
 #'     estándar
 #' @param x character: nombre del objeto.
@@ -355,11 +352,11 @@ get_off_c <- function(x = character(), file = character()) {
     invisible(get(x, env = ne, inherits = FALSE))
 }
 
-#' Lee - asigna data.frames
-#' @description Lee uno o más data.frame y los asigna a una variable.
+#' Leer-data.frames
+#' @description Leer uno o más data.frame
 #' @details Es alias de la función \code{get_off} con argumento
 #'     "data.frame" en el parámetro "class", pero con el parámetro
-#'     "file" al inicio, para que no sea necesario escribirlo.
+#'     "file" al inicio. Más de un data.frame devueltos en una lista.
 #' @param file character: nombre del archivo
 #' @param ... nombres de los data.frame o vector tipo character con
 #'     los nombres. Si ausente, se leen todos los data.frame en el
@@ -372,6 +369,7 @@ get_off_c <- function(x = character(), file = character()) {
 #'   # "df1", "df2"
 #'   x <- get_dffs("path/file", df2)
 #'   y <- get_dffs("path/file", df2, df1)
+#'   z <- get_dffs("path/file")
 #' }
 #' @export
 #' @author eddy castellón
@@ -390,12 +388,15 @@ get_dffs <- function(file, ...) {
 }
 
 #' Lee - asigna un data.frame
-#' @description Lee un data frame y lo asocia con una variable
+#' @description Lee data frame almacenado en archivo
 #' @param x nombre del data frame o character con el nombre
 #' @param file character: nombre del archivo
-#' @return a data.frame o NULL
+#' @return data.frame o NULL
 #' @seealso \code{get_dffs} \code{get_off}
 #' @export
+#' @examples
+#' x <- get_dff(aja, "arar.rda")
+#' x <- get_dff("aja", "arar.rda")
 #' @author eddy castellón
 get_dff <- function(x, file) {
     df <- as.character(substitute(x))
