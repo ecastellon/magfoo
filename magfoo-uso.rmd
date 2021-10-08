@@ -1,0 +1,114 @@
+---
+title: "Librería magfoo"
+output: html_notebook
+---
+
+# Los problemas
+
+Antes de platicar el problema que se trata de resolver con las funciones en *magfoo*, conviene, como antecedente, recordar cómo es que las aplicaciones usan la memoria /RAM/.
+
+Todo lo que es la ejecución de los programas y el procesamiento ocurre en el /CPU/. Pero este está compuesto de sólo unos cuantos compartimientos llamados /registros/ donde se hacen las operaciones. Todas las miles o millones de "variables" que utilizan las aplicaciones durante su ejecución, están alojadas en la memoria /RAM/. Para que el /CPU/ tenga acceso a datos específicos que están en la /RAM/, en un área dedicada de esta (la /RAM), denominada /stack/, hay lo que se llama la /tabla de símbolos/, que es, esencialmente, una especie de libreta de direcciones donde están anotadas los nombres de las "variables" (símbolos) y la dirección dentro de la /RAM/ donde están los datos que le corresponden. Cada vez que el /CPU/ requiere algún dato en particular, hace un llamado a la tabla de símbolos para consultar en qué lugar de la /RAM/ está el dato que necesita, y con eso resuelto, lleva el dato en cuestión a sus registros para hacer la operación (suma, multiplicación, o lo que sea) que le dice el código que haga.
+
+Cuando en /R/ se manda ejecutar la línea de código que viene adelante, ocurren dos cosas:
+
+1. en algún lugar de la /RAM/ se anota el valor 2.3
+2. en la tabla de símbolos se anotan el símbolo (o nombre) `x`, y la dirección (posición) del dato dentro de la /RAM/. En el argot de la programación a esto se le llama, en inglés, "binding"; es decir, la asociación del símbolo con el dato por intermedio de la dirección. Desde otra perspectiva, también se dice que `x` "apunta" al valor 2.3.
+
+```{r}
+x <- 2.3
+```
+
+Es por medio de los nombres que el programador se refiere a los datos que están en la /RAM/, y hace que /R/ evalúe las instrucciones para obtener un resultado, como por ejemplo
+
+```{r}
+log(x)
+```
+
+La librería /lobstr/ permite explorar algunas de estas cosas y aprender lo que ocurre "tras bambalinas". La siguiente instrucción devuelve la dirección (dentro de la /RAM/) donde está el valor asociado al símbolo `x`. Es costumbre que las direcciones sean reveladas en números de base 16 (número hexadecimal) en lugar de la familiar base 10.
+
+```{r}
+library(lobstr)
+obj_addr(x)
+```
+
+Vea lo que pasa ahora
+
+```{r}
+x <- 2.3
+obj_addr(x)
+
+x <- 2.3
+obj_addr(x)
+```
+
+Eso muestra que los procesos de asignación del valor (en este caso, 2.3) en la /RAM/ y del nombre o símbolo, son independientes. Lo que pasa es que cada vez que se le pide a /R/ un "binding", este le "pide" al sistema operativo que administra la /RAM/ un lugar para guardar el dato, y este asigna el espacio conforme a cierto algoritmo que da como resultado direcciones diferentes.
+
+Otro caso:
+```{r}
+x <- c("a", "e", "i", "o", "u")
+obj_addr(x)
+
+obj_addr(x[1])
+obj_addr(x[2])
+obj_addr(x[3])
+obj_addr(x[4])
+```
+
+```{r}
+x <- c(1, 2, 3, 4)
+obj_addr(x)
+obj_addr(x[1])
+obj_addr(x[2])
+obj_addr(x[3])
+obj_addr(x[4])
+```
+```{r}
+strtoi("0xfffffff", base = 16L)
+strtoi("0x238619821b0", base = 16L)
+strtoi("0x23865b0bf98", base = 16L)
+[1] "0x2386ccff288"
+[1] "0x2386ccfee60"
+[1] "0x2386cd1bcb8"
+[1] "0x2386cd1b890"
+strtoi("0x19821b0", base = 16L)
+strtoi("0x2ea3718", base = 16L)
+strtoi("0x2ea3b40", base = 16L)
+strtoi("0x2ea3f68", base = 16L)
+strtoi("0x2ea43c8", base = 16L)
+```
+
+En el siguiente caso, se abre una entrada en la tabla de símbolos para alojar `y`, y se copia la dirección donde apunta `x`. Como resultado, /R/ dice que `x` e `y` son objetos idénticos.
+```{r}
+x <- 2.3
+y <- x
+obj_addr(x)
+obj_addr(y)
+identical(x, y)
+```
+
+Ahora,
+```{r}
+y <- y + 1
+obj_addr(x)
+obj_addr(y)
+identical(x, y)
+```
+
+Al modificar el valor asociado a `y`, el sistema operativo ubica al resultado en otra dirección y los objetos `x` e `y` dejan de ser idénticos.
+
+
+
+
+This is an [R Markdown](http://rmarkdown.rstudio.com) Notebook. When you execute code within the notebook, the results appear beneath the code. 
+
+Try executing this chunk by clicking the *Run* button within the chunk or by placing your cursor inside it and pressing *Ctrl+Shift+Enter*. 
+
+```{r}
+plot(cars)
+```
+
+Add a new chunk by clicking the *Insert Chunk* button on the toolbar or by pressing *Ctrl+Alt+I*.
+
+When you save the notebook, an HTML file containing the code and output will be saved alongside it (click the *Preview* button or press *Ctrl+Shift+K* to preview the HTML file).
+
+The preview shows you a rendered HTML copy of the contents of the editor. Consequently, unlike *Knit*, *Preview* does not run any R code chunks. Instead, the output of the chunk when it was last run in the editor is displayed.
