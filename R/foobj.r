@@ -51,7 +51,7 @@ meta <- function(x, read_me = FALSE) {
     } else {
         if (read_me) {
             if (is_path(cc) && file.access(cc, mode = 4L) == 0) {
-                cc <- try(read.cdf(cc))
+                cc <- try(read.dcf(cc))
             } else {
                 message("\n... acceso al archivo, denegado !!!")
             }
