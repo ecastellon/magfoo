@@ -12,10 +12,14 @@ get_dff(x, file)
 \item{file}{character: nombre del archivo}
 }
 \value{
-a data.frame o NULL
+data.frame o NULL
 }
 \description{
-Lee un data frame y lo asocia con una variable
+Lee data frame almacenado en archivo
+}
+\examples{
+x <- get_dff(aja, "arar.rda")
+x <- get_dff("aja", "arar.rda")
 }
 \seealso{
 \code{get_dffs} \code{get_off}

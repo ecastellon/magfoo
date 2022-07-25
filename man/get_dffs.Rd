@@ -2,7 +2,7 @@
 % Please edit documentation in R/foobj.r
 \name{get_dffs}
 \alias{get_dffs}
-\title{Lee - asigna data.frames}
+\title{Leer-data.frames}
 \usage{
 get_dffs(file, ...)
 }
@@ -17,12 +17,12 @@ archivo.}
 data.frame, lista de data frames o \code{NULL}
 }
 \description{
-Lee uno o más data.frame y los asigna a una variable.
+Leer uno o más data.frame
 }
 \details{
 Es alias de la función \code{get_off} con argumento
 "data.frame" en el parámetro "class", pero con el parámetro
-"file" al inicio, para que no sea necesario escribirlo.
+"file" al inicio. Más de un data.frame devueltos en una lista.
 }
 \examples{
 \dontrun{
@@ -30,6 +30,7 @@ Es alias de la función \code{get_off} con argumento
   # "df1", "df2"
   x <- get_dffs("path/file", df2)
   y <- get_dffs("path/file", df2, df1)
+  z <- get_dffs("path/file")
 }
 }
 \seealso{

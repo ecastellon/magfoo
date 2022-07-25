@@ -12,8 +12,7 @@ meta(x) <- value
 \item{value}{character: metadatos}
 }
 \description{
-Le asigna a un objeto, una breve descripción o
-metadatos.
+Asignar una breve descripción o metadatos.
 }
 \details{
 Al objeto se le agrega el atributo "meta" para registrar

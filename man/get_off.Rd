@@ -2,7 +2,7 @@
 % Please edit documentation in R/foobj.r
 \name{get_off}
 \alias{get_off}
-\title{Lee y asigna objetos}
+\title{Leer objetos}
 \usage{
 get_off(..., file = character(), class = ".")
 }
@@ -16,12 +16,11 @@ almacenados}
 cualquier clase (\code{class = "."})}
 }
 \value{
-objeto, lista de objectos o \code{NULL}
+objeto, lista de objetos o \code{NULL}
 }
 \description{
-Lee uno o más objetos almacenados en archivo y los
-asigna (bind) a una variable. La variable será un objeto de
-clase lista si son leídos dos o más objetos.
+Lee uno o más objetos almacenados en archivo. Cuando
+es más de uno, se devuelven en una lista.
 }
 \examples{
 df <- data.frame(x = 1:3, y = 3:1)

@@ -2,7 +2,7 @@
 % Please edit documentation in R/foobj.r
 \name{get_off_c}
 \alias{get_off_c}
-\title{Leer-asignar objeto}
+\title{Leer-objeto}
 \usage{
 get_off_c(x = character(), file = character())
 }
@@ -15,8 +15,7 @@ get_off_c(x = character(), file = character())
 objeto o \code{NULL}
 }
 \description{
-Lee un objeto almacenado en archivo y lo asigna (bind)
-a una variable.
+Lee un objeto almacenado en archivo
 }
 \details{
 Versión simplificada de \code{get_off} con llamada
