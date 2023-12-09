@@ -21,8 +21,10 @@ el que se hace una descripción más extensa. Ese nombre debe
 contener al menos una pleca ("/") para que la función no
 interprete el nombre como metadatos. El contenido del archivo
 debe apegarse al formato "DCF", explicado en la ayuda de la
-función \code{read.dcf}.\preformatted{Es una alternativa de la función \code{comment}.
-}
+función \code{read.dcf}.
+
+\if{html}{\out{<div class="sourceCode">}}\preformatted{Es una alternativa de la función \code{comment}.
+}\if{html}{\out{</div>}}
 }
 \examples{
 df <- data.frame(x = 1:3, y = 3:1)
